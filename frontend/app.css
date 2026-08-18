@@ -1,0 +1,459 @@
+/* =====================================================================
+   AI Resume Portfolio Generator - Frontend Stage 1
+   Pure CSS. No frameworks, no external libraries.
+   ===================================================================== */
+
+:root {
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-soft: #eff6ff;
+  --primary-border: #bfdbfe;
+  --text: #111827;
+  --text-muted: #4b5563;
+  --bg: #f8fafc;
+  --bg-accent: #eef2ff;
+  --card-bg: #ffffff;
+  --border: #e5e7eb;
+  --border-strong: #cbd5e1;
+  --success: #059669;
+  --danger: #b91c1c;
+  --danger-bg: #fef2f2;
+  --danger-border: #fecaca;
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow: 0 10px 25px -6px rgba(15, 23, 42, 0.08), 0 4px 12px -6px rgba(15, 23, 42, 0.05);
+  --shadow-hover: 0 18px 36px -12px rgba(37, 99, 235, 0.22);
+  --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.45);
+  --max-width: 880px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+  background:
+    radial-gradient(900px 400px at 85% -50px, rgba(37, 99, 235, 0.08), transparent 60%),
+    radial-gradient(700px 350px at -10% 10%, rgba(99, 102, 241, 0.07), transparent 55%),
+    var(--bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  padding: 34px 0 10px;
+  text-align: center;
+}
+
+.project-name {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.project-subtitle {
+  margin: 6px 0 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  text-align: center;
+  padding: 28px 0 34px;
+}
+
+.hero-title {
+  margin: 0 auto;
+  max-width: 620px;
+  font-size: clamp(1.9rem, 4.5vw, 2.7rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.hero-title .accent {
+  color: var(--primary);
+}
+
+.hero-desc {
+  margin: 16px auto 0;
+  max-width: 560px;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+/* ---------- Cards ---------- */
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px;
+}
+
+.card-title {
+  margin: 0 0 4px;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.card-hint {
+  margin: 0 0 20px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+/* ---------- Upload card ---------- */
+
+.upload-card {
+  text-align: center;
+}
+
+.drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 40px 24px;
+  border: 2px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--primary-soft);
+  color: var(--primary);
+  cursor: pointer;
+  transition: border-color 0.18s ease, background-color 0.18s ease,
+    box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.drop-zone:hover {
+  border-color: var(--primary);
+  background: #e8efff;
+}
+
+.drop-zone.is-dragging {
+  border-color: var(--primary);
+  background: #dbe7ff;
+  box-shadow: var(--shadow-hover);
+  transform: scale(1.01);
+}
+
+.drop-zone:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.upload-icon {
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.drop-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.drop-subtitle {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.file-name {
+  min-height: 1.5em;
+  margin: 14px 0 4px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--success);
+}
+
+.file-name--error {
+  color: var(--danger);
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    transform 0.12s ease, box-shadow 0.15s ease;
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.btn-primary:disabled {
+  background: #cbd5e1;
+  color: #64748b;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--card-bg);
+  color: var(--primary);
+  border-color: var(--primary-border);
+}
+
+.btn-secondary:hover {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+}
+
+.action-row {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn-ghost {
+  margin-top: 14px;
+  background: transparent;
+  color: var(--text-muted);
+  border-color: transparent;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+}
+
+.btn-ghost:hover {
+  color: var(--danger);
+  background: transparent;
+  border-color: transparent;
+  text-decoration: underline;
+}
+
+/* ---------- Stage notice (temporary UI message) ---------- */
+
+.stage-notice {
+  margin: 14px auto 0;
+  max-width: 460px;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-accent);
+  border: 1px solid var(--primary-border);
+  color: var(--primary-hover);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+/* ---------- Loading state ---------- */
+
+.loading-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 28px;
+  padding: 36px 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid var(--primary-soft);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-title {
+  margin: 10px 0 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.loading-sub {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* ---------- Result section ---------- */
+
+.result-section {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.success-message {
+  margin: 8px 0 18px;
+  font-weight: 600;
+  color: var(--success);
+}
+
+.preview-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 220px;
+  border: 2px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--primary-soft);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.preview-icon {
+  font-size: 2.4rem;
+}
+
+.result-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Error section ---------- */
+
+.error-section {
+  margin-top: 28px;
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-border);
+  color: var(--danger);
+  font-weight: 500;
+  text-align: center;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  margin-top: 56px;
+  padding: 26px 0 34px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.site-footer p {
+  margin: 2px 0;
+}
+
+.footer-note {
+  opacity: 0.8;
+}
+
+/* ---------- Utilities ---------- */
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .site-header {
+    padding-top: 26px;
+  }
+
+  .card {
+    padding: 20px 16px;
+  }
+
+  .drop-zone {
+    padding: 28px 16px;
+  }
+
+  .hero {
+    padding: 20px 0 26px;
+  }
+
+  .result-actions .btn,
+  .action-row .btn {
+    width: 100%;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .spinner {
+    animation-duration: 1.6s;
+  }
+
+  .drop-zone,
+  .btn {
+    transition: none;
+  }
+}

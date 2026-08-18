@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{NAME}} - Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- Header / Hero Section -->
+  <header class="portfolio-header">
+    <div class="container">
+      <h1 class="portfolio-name">{{NAME}}</h1>
+      <p class="portfolio-headline">{{HEADLINE}}</p>
+      <div class="hero-contact">{{CONTACT_CONTENT}}</div>
+    </div>
+  </header>
+
+  <main class="container" id="main-content">
+
+    <!-- Professional Summary Section -->
+    <!-- SECTION:SUMMARY -->
+    <section class="portfolio-section" id="summary" aria-labelledby="summary-heading">
+      <h2 id="summary-heading">Professional Summary</h2>
+      <p class="summary-text">{{SUMMARY_CONTENT}}</p>
+    </section>
+    <!-- END_SECTION:SUMMARY -->
+
+    <!-- Skills Section -->
+    <!-- SECTION:SKILLS -->
+    <section class="portfolio-section" id="skills" aria-labelledby="skills-heading">
+      <h2 id="skills-heading">Skills</h2>
+      <ul class="skills-list">
+        {{SKILLS_CONTENT}}
+      </ul>
+    </section>
+    <!-- END_SECTION:SKILLS -->
+
+    <!-- Experience Section -->
+    <!-- SECTION:EXPERIENCE -->
+    <section class="portfolio-section" id="experience" aria-labelledby="experience-heading">
+      <h2 id="experience-heading">Professional Experience</h2>
+      <div class="experience-list">
+        {{EXPERIENCE_CONTENT}}
+      </div>
+    </section>
+    <!-- END_SECTION:EXPERIENCE -->
+
+    <!-- Education Section -->
+    <!-- SECTION:EDUCATION -->
+    <section class="portfolio-section" id="education" aria-labelledby="education-heading">
+      <h2 id="education-heading">Education</h2>
+      <div class="education-list">
+        {{EDUCATION_CONTENT}}
+      </div>
+    </section>
+    <!-- END_SECTION:EDUCATION -->
+
+    <!-- Projects Section -->
+    <!-- SECTION:PROJECTS -->
+    <section class="portfolio-section" id="projects" aria-labelledby="projects-heading">
+      <h2 id="projects-heading">Projects</h2>
+      <div class="projects-grid">
+        {{PROJECTS_CONTENT}}
+      </div>
+    </section>
+    <!-- END_SECTION:PROJECTS -->
+
+    <!-- Achievements Section -->
+    <!-- SECTION:ACHIEVEMENTS -->
+    <section class="portfolio-section" id="achievements" aria-labelledby="achievements-heading">
+      <h2 id="achievements-heading">Achievements &amp; Honors</h2>
+      <ul class="achievements-list">
+        {{ACHIEVEMENTS_CONTENT}}
+      </ul>
+    </section>
+    <!-- END_SECTION:ACHIEVEMENTS -->
+
+    <!-- Contact &amp; Links Section -->
+    <!-- SECTION:CONTACT -->
+    <section class="portfolio-section contact-section" id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Contact &amp; Links</h2>
+      <div class="contact-details">
+        {{CONTACT_CONTENT}}
+      </div>
+    </section>
+    <!-- END_SECTION:CONTACT -->
+
+  </main>
+
+  <footer class="portfolio-footer">
+    <div class="container">
+      <p>&copy; {{NAME}} &middot; Generated with AI-Assisted Resume Portfolio Generator</p>
+    </div>
+  </footer>
+
+</body>
+</html>

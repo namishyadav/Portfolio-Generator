@@ -1,0 +1,465 @@
+/* =====================================================================
+   style.css - AI-Assisted Resume Portfolio Generator
+   Professional, responsive, framework-free portfolio styling.
+   ===================================================================== */
+
+:root {
+  /* Palette */
+  --ink: #0f172a;
+  --ink-soft: #334155;
+  --muted: #64748b;
+  --faint: #94a3b8;
+  --paper: #f8fafc;
+  --card: #ffffff;
+  --line: #e2e8f0;
+  --line-soft: #eef2f7;
+  --accent: #2563eb;
+  --accent-strong: #1d4ed8;
+  --accent-soft: #eff6ff;
+  --accent-line: #bfdbfe;
+  --badge-bg: #eef2ff;
+  --badge-ink: #4338ca;
+  --badge-line: #e0e7ff;
+
+  /* Shape & depth */
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -14px rgba(15, 23, 42, 0.12);
+  --shadow-hover: 0 14px 30px -14px rgba(37, 99, 235, 0.2);
+  --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.4);
+  --max-width: 960px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--ink);
+  background:
+    radial-gradient(1100px 480px at 50% -220px, rgba(37, 99, 235, 0.07), transparent 62%),
+    var(--paper);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: var(--accent);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ---------- Accessibility: skip link & focus ---------- */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.7rem 1.2rem;
+  background: var(--ink);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 0 0 8px 0;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 4px;
+}
+
+/* ---------- Header / Hero ---------- */
+
+.portfolio-header {
+  padding: 4.5rem 0 3.25rem;
+  text-align: center;
+}
+
+.portfolio-name {
+  font-size: clamp(2.25rem, 6vw, 3.1rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.portfolio-headline {
+  margin-top: 0.65rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* Compact contact strip in the hero (hidden when empty) */
+.hero-contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.hero-contact:empty {
+  display: none;
+}
+
+.hero-contact .contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.hero-contact .contact-item a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hero-contact .contact-item a:hover {
+  color: var(--accent-strong);
+  text-decoration: underline;
+}
+
+/* ---------- Sections ---------- */
+
+main {
+  padding-bottom: 2.5rem;
+}
+
+.portfolio-section {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 2rem 2.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.portfolio-section h2 {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--faint);
+  padding-bottom: 0.7rem;
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid var(--line-soft);
+  position: relative;
+}
+
+.portfolio-section h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 2.75rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.summary-text {
+  color: var(--ink-soft);
+  font-size: 1rem;
+  max-width: 70ch;
+}
+
+/* ---------- Skills ---------- */
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  list-style: none;
+}
+
+.skill-tag {
+  background: var(--badge-bg);
+  color: var(--badge-ink);
+  border: 1px solid var(--badge-line);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* ---------- Experience & Education items ---------- */
+
+.experience-list .item-card,
+.education-list .item-card {
+  padding: 0 0 1.5rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.experience-list .item-card:last-child,
+.education-list .item-card:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.item-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+}
+
+.item-title {
+  font-size: 1.06rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.item-date {
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--faint);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.item-subtitle {
+  margin-top: 0.15rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.item-meta {
+  margin-top: 0.2rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.item-description {
+  margin-top: 0.6rem;
+  padding-left: 1.3rem;
+}
+
+.item-description li {
+  margin-bottom: 0.35rem;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+.item-description li::marker {
+  color: var(--faint);
+}
+
+/* ---------- Projects ---------- */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1.25rem;
+}
+
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  padding: 1.5rem 1.5rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent-line);
+}
+
+.project-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.project-title a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.project-title a:hover {
+  color: var(--accent-strong);
+  text-decoration: underline;
+}
+
+.project-card .item-date {
+  order: -1;
+  align-self: flex-start;
+}
+
+.project-desc {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.project-card .item-description {
+  margin-top: 0;
+  flex: 1;
+}
+
+.project-card .skills-list {
+  margin-top: 0.4rem;
+}
+
+/* ---------- Achievements ---------- */
+
+.achievements-list {
+  list-style: none;
+}
+
+.achievements-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.55rem;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+.achievements-list li::before {
+  content: "\2726";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+
+.achievements-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Contact section ---------- */
+
+.contact-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.contact-section .contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 1rem;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.contact-section .contact-item a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.contact-section .contact-item a:hover {
+  color: var(--accent-strong);
+  text-decoration: underline;
+}
+
+/* ---------- Footer ---------- */
+
+.portfolio-footer {
+  margin-top: 1.5rem;
+  padding: 1.75rem 0 2.5rem;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  color: var(--faint);
+  font-size: 0.8125rem;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 720px) {
+  .portfolio-header {
+    padding: 3.25rem 0 2.5rem;
+  }
+
+  .portfolio-section {
+    padding: 1.5rem 1.4rem;
+    border-radius: var(--radius-md);
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .portfolio-name {
+    letter-spacing: -0.02em;
+  }
+
+  .hero-contact .contact-item {
+    font-size: 0.8125rem;
+  }
+
+  .item-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
+
+  .portfolio-section {
+    padding: 1.3rem 1.1rem;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .project-card {
+    transition: none;
+  }
+}

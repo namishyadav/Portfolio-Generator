@@ -1,0 +1,60 @@
+====================================================================
+SAMPLE RESUME FOR TESTING (Replace with your actual resume text)
+====================================================================
+Note for Students: Please replace all content below with your own resume text.
+Do NOT include sensitive information like passwords, government IDs, 
+home addresses, or financial data.
+====================================================================
+
+Alex Morgan
+Computer Science Student & Aspiring Software Engineer
+Seattle, WA | alex.morgan@example.com | (555) 019-2831 | github.com/alexmorgan-dev | linkedin.com/in/alexmorgan-dev
+
+PROFESSIONAL SUMMARY
+Motivated Senior Computer Science undergraduate with strong foundations in Python, algorithms, and modern web development. Experienced in building responsive web applications, working with REST APIs, and collaborating on academic group projects. Passionate about software engineering and open-source software.
+
+SKILLS
+- Programming Languages: Python, JavaScript, HTML5, CSS3, SQL
+- Developer Tools: Git, GitHub, VS Code, Linux, Docker Basics
+- Concepts: Data Structures, Algorithms, Object-Oriented Programming, REST APIs, System Design Principles
+
+EDUCATION
+Bachelor of Science in Computer Science
+University of Washington, Seattle, WA
+Expected Graduation: May 2026 | GPA: 3.8 / 4.0
+Relevant Coursework: Data Structures, Software Engineering, Database Management, Web Development
+
+EXPERIENCE
+Software Engineering Intern | TechStart Solutions | Seattle, WA
+June 2025 - August 2025
+- Developed and maintained internal dashboard tools using Python and modern web technologies.
+- Collaborated with 4 software developers using Git and Agile methodologies to deliver weekly sprints.
+- Optimized data parsing scripts, reducing execution time by 25%.
+
+Computer Science Tutor | University Learning Center | Seattle, WA
+September 2024 - Present
+- Conducted 1-on-1 and group tutoring sessions for intro Python and Data Structures courses.
+- Helped over 50 students understand fundamental programming concepts and debugging strategies.
+
+PROJECTS
+Smart Study Planner | Python, HTML, CSS
+September 2025 - November 2025
+- Built a web application to help students organize study schedules and track task completion.
+- Implemented file storage for user schedules and custom calendar views.
+- Link: https://github.com/alexmorgan-dev/study-planner
+
+Automated Weather Dashboard | Python, REST APIs
+January 2025 - March 2025
+- Created a CLI tool fetching live weather metrics from open REST APIs and formatted reporting summaries.
+- Handled API error states and edge cases gracefully.
+
+ACHIEVEMENTS
+- Dean's Honor List: 4 consecutive semesters (2024 - 2025)
+- 1st Place, UW Annual Hackathon: Best Student Productivity Tool (2025)
+
+CONTACT & LINKS
+Email: alex.morgan@example.com
+Phone: (555) 019-2831
+Location: Seattle, WA
+GitHub: https://github.com/alexmorgan-dev
+LinkedIn: https://linkedin.com/in/alexmorgan-dev

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Resume Portfolio Generator</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="container">
+      <p class="project-name">AI Resume Portfolio Generator</p>
+      <p class="project-subtitle">Turn your CV into a personal portfolio &mdash; upload, analyze, and generate in minutes.</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <h1 class="hero-title">Turn your CV into a <span class="accent">professional portfolio</span></h1>
+      <p class="hero-desc">
+        Paste or upload your plain-text CV and get a clean, modern personal portfolio
+        page &mdash; with your skills, experience, projects, and achievements organized automatically.
+      </p>
+    </section>
+
+    <!-- ================= CV UPLOAD CARD ================= -->
+    <section class="card upload-card" aria-labelledby="upload-heading">
+      <h2 class="card-title" id="upload-heading">Upload your CV</h2>
+      <p class="card-hint">Supported format: <strong>.txt</strong></p>
+
+      <div
+        class="drop-zone"
+        id="dropZone"
+        role="button"
+        tabindex="0"
+        aria-label="Upload your CV. Drop a .txt file here or press Enter to choose a file."
+      >
+        <!-- Upload icon (inline SVG, no external assets) -->
+        <svg class="upload-icon" width="56" height="56" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M4 14.9A7 7 0 1 1 15.7 8h1.8a4.5 4.5 0 0 1 2.5 8.2"/>
+          <path d="M12 12v9"/>
+          <path d="m8 17 4-4 4 4"/>
+        </svg>
+        <p class="drop-title">Drop your CV here</p>
+        <p class="drop-subtitle">or choose a file</p>
+        <input type="file" id="cvFile" accept=".txt,text/plain" class="visually-hidden">
+      </div>
+
+      <p class="file-name" id="fileName" aria-live="polite"></p>
+
+      <div class="action-row">
+        <button type="button" id="chooseBtn" class="btn btn-secondary">Choose Resume</button>
+        <button type="button" id="generateBtn" class="btn btn-primary" disabled>
+          Generate Portfolio
+        </button>
+      </div>
+      <button type="button" id="resetBtn" class="btn btn-ghost" aria-label="Reset the upload form">
+        Reset
+      </button>
+
+      <p class="stage-notice hidden" id="stageNotice" role="status"></p>
+    </section>
+
+    <!-- ================= LOADING STATE (hidden; activated by backend integration later) ================= -->
+    <section class="loading-section hidden" id="loadingSection" aria-label="Loading">
+      <div class="spinner" role="status" aria-label="Loading"></div>
+      <p class="loading-title">Analyzing your CV...</p>
+      <p class="loading-sub">Extracting information and building your portfolio...</p>
+    </section>
+
+    <!-- ================= RESULT SECTION (hidden) ================= -->
+    <section class="card result-section hidden" id="resultSection" aria-labelledby="result-heading">
+      <h2 class="card-title" id="result-heading">Your portfolio is ready!</h2>
+      <p class="success-message">Your portfolio has been generated successfully.</p>
+      <div class="preview-placeholder" aria-hidden="true">
+        <span class="preview-icon">&#128196;</span>
+        <p>Your generated portfolio preview will appear here.</p>
+      </div>
+      <div class="result-actions">
+        <button type="button" id="viewBtn" class="btn btn-primary">View Portfolio</button>
+        <button type="button" id="downloadBtn" class="btn btn-secondary">Download Portfolio</button>
+      </div>
+    </section>
+
+    <!-- ================= ERROR SECTION (hidden) ================= -->
+    <section class="error-section hidden" id="errorSection" role="alert">
+      <p id="errorMessage">Something went wrong while generating your portfolio. Please try again.</p>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>AI Resume Portfolio Generator</p>
+      <p class="footer-note">Built with Python &middot; Gemini API &middot; HTML &middot; CSS</p>
+    </div>
+  </footer>
+
+  <!--
+    Minimal vanilla JavaScript (no libraries, no frameworks, no npm):
+    file selection, filename display, button enabling, drag-and-drop visuals,
+    and the POST /generate integration with the local Python server.
+  -->
+  <script>
+    (function () {
+      'use strict';
+
+      var dropZone = document.getElementById('dropZone');
+      var fileInput = document.getElementById('cvFile');
+      var fileName = document.getElementById('fileName');
+      var chooseBtn = document.getElementById('chooseBtn');
+      var resetBtn = document.getElementById('resetBtn');
+      var generateBtn = document.getElementById('generateBtn');
+      var loadingSection = document.getElementById('loadingSection');
+      var resultSection = document.getElementById('resultSection');
+      var errorSection = document.getElementById('errorSection');
+      var errorMessage = document.getElementById('errorMessage');
+      var viewBtn = document.getElementById('viewBtn');
+      var downloadBtn = document.getElementById('downloadBtn');
+      var selectedFile = null;
+      var generating = false;
+
+      function isTxtFile(file) {
+        return /\.txt$/i.test(file.name) || file.type === 'text/plain';
+      }
+
+      function setSelectionError(message) {
+        fileName.textContent = message;
+        fileName.classList.add('file-name--error');
+        generateBtn.disabled = true;
+        selectedFile = null;
+      }
+
+      function handleFile(file) {
+        if (!file) {
+          return;
+        }
+        if (!isTxtFile(file)) {
+          setSelectionError('Please choose a .txt file.');
+          return;
+        }
+        if (file.size === 0) {
+          setSelectionError('The selected file is empty. Please choose a .txt file with content.');
+          return;
+        }
+        selectedFile = file;
+        fileName.textContent = 'Selected: ' + file.name;
+        fileName.classList.remove('file-name--error');
+        generateBtn.disabled = false;
+        // A new file invalidates any previous result.
+        resultSection.classList.add('hidden');
+        errorSection.classList.add('hidden');
+      }
+
+      function showError(message) {
+        errorMessage.textContent = message;
+        errorSection.classList.remove('hidden');
+      }
+
+      // Read the body as text first, then try to parse it as JSON. A non-JSON
+      // response (e.g. a proxy error page) is handled gracefully instead of
+      // crashing the promise chain.
+      function readResponse(response) {
+        return response.text().then(function (text) {
+          var data = null;
+          try {
+            data = JSON.parse(text);
+          } catch (err) {
+            data = null;
+          }
+          return { ok: response.ok, status: response.status, data: data };
+        });
+      }
+
+      // Build a clean, human-readable message. The server already sends safe
+      // messages in JSON; the fallbacks never expose internals.
+      function messageForResult(result) {
+        if (result.data && typeof result.data.error === 'string' && result.data.error) {
+          return result.data.error;
+        }
+        if (result.status === 429 || result.status === 503) {
+          return 'The service is busy or rate-limited. Please wait a moment and try again.';
+        }
+        if (result.status >= 500) {
+          return 'The server ran into an unexpected problem. Please try again.';
+        }
+        return 'Portfolio generation failed. Please try again.';
+      }
+
+      // File picker
+      fileInput.addEventListener('change', function () {
+        handleFile(fileInput.files[0]);
+      });
+
+      // Drag-and-drop visuals
+      ['dragenter', 'dragover'].forEach(function (type) {
+        dropZone.addEventListener(type, function (e) {
+          e.preventDefault();
+          dropZone.classList.add('is-dragging');
+        });
+      });
+
+      dropZone.addEventListener('dragleave', function (e) {
+        // Only clear the highlight when the pointer actually leaves the zone
+        // (dragleave also fires while moving over child elements).
+        if (!dropZone.contains(e.relatedTarget)) {
+          dropZone.classList.remove('is-dragging');
+        }
+      });
+
+      dropZone.addEventListener('drop', function (e) {
+        e.preventDefault();
+        dropZone.classList.remove('is-dragging');
+        handleFile(e.dataTransfer.files[0]);
+      });
+
+      // Prevent the browser from opening the file if it is dropped outside the zone
+      ['dragover', 'drop'].forEach(function (type) {
+        document.addEventListener(type, function (e) {
+          e.preventDefault();
+        });
+      });
+
+      // Click / keyboard access to open the file picker
+      dropZone.addEventListener('click', function () {
+        fileInput.click();
+      });
+
+      dropZone.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          fileInput.click();
+        }
+      });
+
+      // Explicit "Choose Resume" button opens the same file picker.
+      chooseBtn.addEventListener('click', function () {
+        fileInput.click();
+      });
+
+      // Reset clears the selection and any previous result/error state.
+      resetBtn.addEventListener('click', function () {
+        selectedFile = null;
+        fileInput.value = '';
+        fileName.textContent = '';
+        fileName.classList.remove('file-name--error');
+        generateBtn.disabled = true;
+        loadingSection.classList.add('hidden');
+        resultSection.classList.add('hidden');
+        errorSection.classList.add('hidden');
+      });
+
+      // Generate: POST the selected .txt to the local server, which runs the
+      // existing Python pipeline. The button is disabled during generation to
+      // prevent duplicate submissions, then restored in all outcomes.
+      generateBtn.addEventListener('click', function () {
+        if (!selectedFile || generating) {
+          return;
+        }
+
+        generating = true;
+        generateBtn.disabled = true;
+        resultSection.classList.add('hidden');
+        errorSection.classList.add('hidden');
+        loadingSection.classList.remove('hidden');
+
+        var form = new FormData();
+        form.append('cv', selectedFile, selectedFile.name);
+
+        fetch('/generate', { method: 'POST', body: form })
+          .then(readResponse)
+          .then(function (result) {
+            if (result.ok && result.data && result.data.success) {
+              var url = result.data.portfolio_url || '/portfolio';
+              viewBtn.onclick = function () { window.location.href = url; };
+              downloadBtn.onclick = function () { window.location.href = '/download'; };
+              resultSection.classList.remove('hidden');
+            } else {
+              showError(messageForResult(result));
+            }
+          })
+          .catch(function () {
+            showError('Could not reach the server. Make sure it is running, then try again.');
+          })
+          .then(function () {
+            // Always restore the button and hide the loading state.
+            generating = false;
+            generateBtn.disabled = false;
+            loadingSection.classList.add('hidden');
+          });
+      });
+    })();
+  </script>
+</body>
+</html>
