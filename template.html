@@ -10,11 +10,12 @@
 
   <a class="skip-link" href="#main-content">Skip to content</a>
 
-  <!-- Header / Hero Section -->
-  <header class="portfolio-header">
+  <!-- Hero Section -->
+  <header class="hero">
     <div class="container">
-      <h1 class="portfolio-name">{{NAME}}</h1>
-      <p class="portfolio-headline">{{HEADLINE}}</p>
+      <p class="hero-greeting">Hello, I'm</p>
+      <h1 class="hero-name">{{NAME}}</h1>
+      <p class="hero-headline">{{HEADLINE}}</p>
       <div class="hero-contact">{{CONTACT_CONTENT}}</div>
     </div>
   </header>
@@ -23,15 +24,15 @@
 
     <!-- Professional Summary Section -->
     <!-- SECTION:SUMMARY -->
-    <section class="portfolio-section" id="summary" aria-labelledby="summary-heading">
-      <h2 id="summary-heading">Professional Summary</h2>
+    <section class="section summary-section" id="summary" aria-labelledby="summary-heading">
+      <h2 id="summary-heading">About Me</h2>
       <p class="summary-text">{{SUMMARY_CONTENT}}</p>
     </section>
     <!-- END_SECTION:SUMMARY -->
 
     <!-- Skills Section -->
     <!-- SECTION:SKILLS -->
-    <section class="portfolio-section" id="skills" aria-labelledby="skills-heading">
+    <section class="section skills-section" id="skills" aria-labelledby="skills-heading">
       <h2 id="skills-heading">Skills</h2>
       <ul class="skills-list">
         {{SKILLS_CONTENT}}
@@ -41,8 +42,8 @@
 
     <!-- Experience Section -->
     <!-- SECTION:EXPERIENCE -->
-    <section class="portfolio-section" id="experience" aria-labelledby="experience-heading">
-      <h2 id="experience-heading">Professional Experience</h2>
+    <section class="section experience-section" id="experience" aria-labelledby="experience-heading">
+      <h2 id="experience-heading">Experience</h2>
       <div class="experience-list">
         {{EXPERIENCE_CONTENT}}
       </div>
@@ -51,7 +52,7 @@
 
     <!-- Education Section -->
     <!-- SECTION:EDUCATION -->
-    <section class="portfolio-section" id="education" aria-labelledby="education-heading">
+    <section class="section education-section" id="education" aria-labelledby="education-heading">
       <h2 id="education-heading">Education</h2>
       <div class="education-list">
         {{EDUCATION_CONTENT}}
@@ -61,7 +62,7 @@
 
     <!-- Projects Section -->
     <!-- SECTION:PROJECTS -->
-    <section class="portfolio-section" id="projects" aria-labelledby="projects-heading">
+    <section class="section projects-section" id="projects" aria-labelledby="projects-heading">
       <h2 id="projects-heading">Projects</h2>
       <div class="projects-grid">
         {{PROJECTS_CONTENT}}
@@ -71,7 +72,7 @@
 
     <!-- Achievements Section -->
     <!-- SECTION:ACHIEVEMENTS -->
-    <section class="portfolio-section" id="achievements" aria-labelledby="achievements-heading">
+    <section class="section achievements-section" id="achievements" aria-labelledby="achievements-heading">
       <h2 id="achievements-heading">Achievements &amp; Honors</h2>
       <ul class="achievements-list">
         {{ACHIEVEMENTS_CONTENT}}
@@ -79,10 +80,10 @@
     </section>
     <!-- END_SECTION:ACHIEVEMENTS -->
 
-    <!-- Contact &amp; Links Section -->
+    <!-- Contact Section -->
     <!-- SECTION:CONTACT -->
-    <section class="portfolio-section contact-section" id="contact" aria-labelledby="contact-heading">
-      <h2 id="contact-heading">Contact &amp; Links</h2>
+    <section class="section contact-section" id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Get In Touch</h2>
       <div class="contact-details">
         {{CONTACT_CONTENT}}
       </div>
@@ -93,7 +94,7 @@
 
   <footer class="portfolio-footer">
     <div class="container">
-      <p>&copy; {{NAME}} &middot; Generated with AI-Assisted Resume Portfolio Generator</p>
+      <p>&copy; {{NAME}} &middot; AI-Assisted Resume Portfolio Generator</p>
     </div>
   </footer>
 
