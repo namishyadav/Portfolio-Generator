@@ -47,6 +47,7 @@ BASE_DIR = Path(__file__).resolve().parent
 FRONTEND_INDEX = BASE_DIR / "frontend" / "index.html"
 FRONTEND_CSS = BASE_DIR / "frontend" / "app.css"
 PORTFOLIO_FILE = BASE_DIR / "portfolio.html"
+PORTFOLIO_CSS = BASE_DIR / "style.css"
 
 MAX_BODY_BYTES = 1 * 1024 * 1024  # 1 MB cap for uploaded CVs
 MIN_CV_NON_WHITESPACE = 30  # same rule as main.validate_resume_text
@@ -235,6 +236,9 @@ class PortfolioHandler(BaseHTTPRequestHandler):
                 return
             if path == "/app.css":
                 self._send_file(FRONTEND_CSS, "text/css; charset=utf-8")
+                return
+            if path == "/style.css":
+                self._send_file(PORTFOLIO_CSS, "text/css; charset=utf-8")
                 return
             if path == "/portfolio":
                 if not PORTFOLIO_FILE.exists():
